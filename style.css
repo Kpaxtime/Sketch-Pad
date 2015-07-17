@@ -12,17 +12,19 @@ p {
 }
 
 #grid-holder {
-		display: flex;
-		display: block;
 		background-color: #FFFFFF;
+		overflow: hidden;
 		width: 1024px;
 		height: 1024px;
 		margin: 0 auto;
 }
 
 .data-block {
-		display: inline-block;
-		background-color: #353535;
+		float: left;
+		background-color: red;
+		width: 32px;
+		height: 32px;
+		opacity: 1;
 }
 
 .red {
@@ -51,4 +53,8 @@ p {
 .size64 {
 		width: 16px;
 		height: 16px;
+}
+
+.newtext {
+	color: red;
 }
