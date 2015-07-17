@@ -11,6 +11,18 @@ p {
 		text-align: center;
 }
 
+ul {
+		list-style-type: none;
+		display: flex;
+		width: 400px;
+		margin-left: auto;
+		margin-right: auto;
+}
+
+li {
+		margin: 0 auto;
+}
+
 #grid-holder {
 		background-color: #FFFFFF;
 		overflow: hidden;
