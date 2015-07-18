@@ -9,14 +9,27 @@ $(document).ready(function () {
 
 	
 	$('#gradient').on('click', function () {
-		cleargrid();
+		clearGridGradient();
 	});
 	
 
 	$('#trail').on('click', function() {
-		cleargrid();
-		trail();
+		clearGridTrail();
 	});
+
+	$('#rainbow').on('click', function() {
+		clearGridRandom();
+	});
+
+	 /* $('#rapid-change').on('click', function() {
+		clearRandomChange();
+	});
+	*/
+
+	$('#grid').on('click', function() {
+		gridText();
+		showGrid();
+	})
 });
 
 
@@ -67,23 +80,76 @@ function trail() {
 
 function randomColor() {
 	$('.data-block').on('mouseenter',function() {
-		var maxNum = 16777215;
-
-		var newColor = Math.ceil((maxNum * Math.random())).toString(16);
-		var colorLength  = 6 - newColor.length;
-
-		for(var i = 0; i < testLength; i++) {
-			newColor = "0" + newColor;
-		}
-
-		$(this).css('background-color', '#' + testColor);
+		
+		$(this).css('background-color', randomChange());
 	});
 }
 
-function cleargrid() {
+function clearGridGradient() {
 	$('button').on('click', function() {
 		$('#grid-holder').empty();
 		initialize();
 		gradient();
 	});
-}	
+}
+
+function clearGridTrail() {
+	$('button').on('click', function() {
+		$('#grid-holder').empty();
+		initialize();
+		trail();
+	});
+}
+
+function clearGridRandom() {
+	$('button').on('click', function() {
+		$('#grid-holder').empty();
+		initialize();
+		randomColor();
+	});
+}		
+
+ /*function rapidChange() {
+	$('button').on('click', function() {
+		while(true)	{
+			$('.data-block').animate({background-color : randomChange() }, "slow");
+		}
+	});
+}
+*/
+
+function randomChange() {
+		var maxNum = 16777215;
+
+		var newColor = Math.ceil((maxNum * Math.random())).toString(16);
+		var colorLength  = 6 - newColor.length;
+
+		for(var i = 0; i < colorLength; i++) {
+			newColor = "0" + newColor;
+		}
+		newColor = "#" + newColor;
+		return newColor;
+}
+function clearRandomChange() {
+		$('#grid-holder').empty();
+		initialize();
+		rapidChange();
+}
+
+function showGrid() {
+	if($('#grid').text() == "Show Grid") {
+		$('.data-block').addClass('show-grid');
+	}
+	else {
+		$('.data-block').removeClass('show-grid');
+	}
+}
+
+function gridText() {
+	 if($('#grid').text() == "Show Grid") {
+	 	$('#grid').text("Hide Grid"); 
+	 }
+	 else {
+	 	$('#grid').text("Show Grid");
+	 }
+}

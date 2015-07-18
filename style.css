@@ -14,7 +14,7 @@ p {
 ul {
 		list-style-type: none;
 		display: flex;
-		width: 400px;
+		width: 600px;
 		margin-left: auto;
 		margin-right: auto;
 }
@@ -33,7 +33,7 @@ li {
 
 .data-block {
 		float: left;
-		background-color: red;
+		background-color: black;
 		width: 32px;
 		height: 32px;
 		opacity: 1;
@@ -69,4 +69,10 @@ li {
 
 .newtext {
 	color: red;
+}
+
+.show-grid {
+		width: 30px;
+		height: 30px;
+		border: 2px solid white;
 }
