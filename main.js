@@ -1,24 +1,27 @@
+var boxSize;
+var hasGrid = false;
+
 $(document).ready(function () {
-	var boxSize;
 	$('p').on('click', function() {
 	$(this).addClass('newtext');
 
 });
 	initialize();
 	gradient();
+	
 
 	
 	$('#gradient').on('click', function () {
-		clearGridGradient();
+		gradient();
 	});
 	
 
 	$('#trail').on('click', function() {
-		clearGridTrail();
+		trail();
 	});
 
 	$('#rainbow').on('click', function() {
-		clearGridRandom();
+		randomColor();
 	});
 
 	 /* $('#rapid-change').on('click', function() {
@@ -27,7 +30,6 @@ $(document).ready(function () {
 	*/
 
 	$('#grid').on('click', function() {
-		gridText();
 		showGrid();
 	})
 });
@@ -64,6 +66,8 @@ function initialize() {
 }
 
 function gradient() {
+		
+	resetStyle();
 
 	$('.data-block').on('mouseenter', function() {
 		var currentOpacity = $(this).css("opacity");
@@ -72,6 +76,9 @@ function gradient() {
 }
 
 function trail() {
+
+	resetStyle();
+
 	$('.data-block').on('mouseenter', function() {
 		$(this).css("opacity", 0);
 		$(this).animate({opacity: 1}, "slow");
@@ -79,13 +86,16 @@ function trail() {
 }
 
 function randomColor() {
+
+	resetStyle();
+
 	$('.data-block').on('mouseenter',function() {
 		
 		$(this).css('background-color', randomChange());
 	});
 }
 
-function clearGridGradient() {
+/* function clearGridGradient() {
 	$('button').on('click', function() {
 		$('#grid-holder').empty();
 		initialize();
@@ -95,8 +105,7 @@ function clearGridGradient() {
 
 function clearGridTrail() {
 	$('button').on('click', function() {
-		$('#grid-holder').empty();
-		initialize();
+		resetStyle();
 		trail();
 	});
 }
@@ -109,7 +118,7 @@ function clearGridRandom() {
 	});
 }		
 
- /*function rapidChange() {
+ function rapidChange() {
 	$('button').on('click', function() {
 		while(true)	{
 			$('.data-block').animate({background-color : randomChange() }, "slow");
@@ -130,14 +139,27 @@ function randomChange() {
 		newColor = "#" + newColor;
 		return newColor;
 }
-function clearRandomChange() {
+/* function clearRandomChange() {
 		$('#grid-holder').empty();
 		initialize();
 		rapidChange();
 }
-
+*/
 function showGrid() {
 	if($('#grid').text() == "Show Grid") {
+		$('.data-block').addClass('show-grid');
+		 $("#grid").text("Hide Grid");
+		 hasGrid = true;
+	}
+	else {
+		$('.data-block').removeClass('show-grid');
+		$("#grid").text("Show Grid");
+		hasGrid = false;
+	}
+}
+
+function keepGrid() {
+	if(hasGrid) {
 		$('.data-block').addClass('show-grid');
 	}
 	else {
@@ -145,11 +167,17 @@ function showGrid() {
 	}
 }
 
-function gridText() {
-	 if($('#grid').text() == "Show Grid") {
-	 	$('#grid').text("Hide Grid"); 
+/* function gridText() {
+	 if($('#grid').innerHTML == "Show Grid") {
+	 	$('#grid').innerHTML("Hide Grid"); 
 	 }
 	 else {
-	 	$('#grid').text("Show Grid");
+	 	$('#grid').innerHTML("Show Grid");
 	 }
 }
+*/
+function resetStyle() {
+	$('#grid-holder').empty();
+		initialize();
+		keepGrid();
+}	
