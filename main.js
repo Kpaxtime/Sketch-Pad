@@ -1,12 +1,15 @@
 var boxSize;
 var hasGrid = false;
+var gridwidth;
+var gridheight;
+var numBoxes;
 
 $(document).ready(function () {
 	$('p').on('click', function() {
 	$(this).addClass('newtext');
 
 });
-	initialize();
+	setAttributes();
 	gradient();
 	
 
@@ -67,7 +70,7 @@ function initialize() {
 
 function gradient() {
 		
-	resetStyle();
+	
 
 	$('.data-block').on('mouseenter', function() {
 		var currentOpacity = $(this).css("opacity");
@@ -180,4 +183,24 @@ function resetStyle() {
 	$('#grid-holder').empty();
 		initialize();
 		keepGrid();
+}
+
+function setAttributes() {
+	var inputHeight = prompt("Enter the height of the Sketch Pad (in pixels)");
+	var inputWidth = prompt("Enter the width of the Sketch Pad (in pixels)");
+	numBoxes = prompt("Enter the number of boxes per row");
+
+	setWidth = Math.floor(inputHeight/numBoxes);
+	setHeight = Math.floor(inputWidth/numBoxes);
+
+	$("#grid-holder").css({"width": (setWidth * numBoxes), "height": (setHeight * numBoxes)});
+
+	for(var i = 0; i < (numBoxes * numBoxes); i++) {
+		$('#grid-holder').append('<div class="data-block"</div>');
+	}
+
+	$('.data-block').css({"width" : setWidth, "height" : setHeight});
+	
+
+	
 }	

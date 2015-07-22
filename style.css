@@ -14,7 +14,7 @@ p {
 ul {
 		list-style-type: none;
 		display: flex;
-		width: 600px;
+		width: 650px;
 		margin-left: auto;
 		margin-right: auto;
 }
@@ -26,16 +26,12 @@ li {
 #grid-holder {
 		background-color: #FFFFFF;
 		overflow: hidden;
-		width: 1024px;
-		height: 1024px;
 		margin: 0 auto;
 }
 
 .data-block {
 		float: left;
 		background-color: black;
-		width: 32px;
-		height: 32px;
 		opacity: 1;
 }
 
