@@ -1,7 +1,9 @@
-var boxSize;
+var numBoxes = 32;
 var hasGrid = false;
-var gridwidth;
-var gridheight;
+var setWidth = 32;
+var setHeight = 32;
+var inputColor = "black";
+var currentColor = "#820BBB";
 var numBoxes;
 
 $(document).ready(function () {
@@ -9,7 +11,7 @@ $(document).ready(function () {
 	$(this).addClass('newtext');
 
 });
-	setAttributes();
+	runDefault();
 	gradient();
 	
 
@@ -23,17 +25,21 @@ $(document).ready(function () {
 		trail();
 	});
 
-	$('#rainbow').on('click', function() {
+	$('#random-color').on('click', function() {
 		randomColor();
 	});
 
-	 /* $('#rapid-change').on('click', function() {
-		clearRandomChange();
+	  $('#rainbow').on('click', function() {
+		rainbow();
 	});
-	*/
+	
 
 	$('#grid').on('click', function() {
 		showGrid();
+	});
+
+	$('#customize').on('click', function() {
+		setAttributes();
 	})
 });
 
@@ -60,9 +66,8 @@ $('#grid-holder').on('click', function() {
 });
 }
 
-function initialize() {
-	boxSize = 32;
-	for(var i = 0; i <(boxSize * boxSize); i++) {
+function runDefault() {
+	for(var i = 0; i <(32 * 32); i++) {
 		$('#grid-holder').append('<div class="data-block"></div>');
 
 	}
@@ -70,7 +75,7 @@ function initialize() {
 
 function gradient() {
 		
-	
+	resetStyle();
 
 	$('.data-block').on('mouseenter', function() {
 		var currentOpacity = $(this).css("opacity");
@@ -152,11 +157,13 @@ function showGrid() {
 	if($('#grid').text() == "Show Grid") {
 		$('.data-block').addClass('show-grid');
 		 $("#grid").text("Hide Grid");
+		 $("#grid-holder").css({"width": (setWidth * numBoxes + 2 * (+numBoxes)), "height": (setHeight * numBoxes + 2 * (+numBoxes))});
 		 hasGrid = true;
 	}
 	else {
 		$('.data-block').removeClass('show-grid');
 		$("#grid").text("Show Grid");
+		$("#grid-holder").css({"width": (setWidth * numBoxes), "height": (setHeight * numBoxes)});
 		hasGrid = false;
 	}
 }
@@ -181,7 +188,7 @@ function keepGrid() {
 */
 function resetStyle() {
 	$('#grid-holder').empty();
-		initialize();
+		addGrid();
 		keepGrid();
 }
 
@@ -189,18 +196,58 @@ function setAttributes() {
 	var inputHeight = prompt("Enter the height of the Sketch Pad (in pixels)");
 	var inputWidth = prompt("Enter the width of the Sketch Pad (in pixels)");
 	numBoxes = prompt("Enter the number of boxes per row");
+	inputColor = prompt("Enter the grid color");
 
 	setWidth = Math.floor(inputHeight/numBoxes);
 	setHeight = Math.floor(inputWidth/numBoxes);
 
 	$("#grid-holder").css({"width": (setWidth * numBoxes), "height": (setHeight * numBoxes)});
 
-	for(var i = 0; i < (numBoxes * numBoxes); i++) {
-		$('#grid-holder').append('<div class="data-block"</div>');
-	}
-
-	$('.data-block').css({"width" : setWidth, "height" : setHeight});
-	
+	addGrid();
 
 	
 }	
+
+function addGrid() {
+	for(var i = 0; i < (numBoxes * numBoxes); i++) {
+		$('#grid-holder').append('<div class="data-block"</div>');
+	}
+	$('.data-block').css({"width" : setWidth, "height" : setHeight, "background-color" : inputColor});
+}
+
+function rainbow() {
+
+	resetStyle();
+
+	$('.data-block').on('mouseenter',function() {
+	switch(currentColor) {
+		case "#FF0000":
+			currentColor = "#FF7519";
+			break;
+		case "#FF7519":
+			currentColor = 	"#FFFF00";
+			break;
+		case "#FFFF00":
+			currentColor = "#66FF33";
+			break;
+		case "#66FF33":
+			currentColor = 	"#0000FF";
+			break;
+		case "#0000FF":
+			currentColor = "#2E0854";
+			break;
+		case "#2E0854":
+			currentColor = "#820BBB";
+			break;
+		case "#820BBB":
+			currentColor = "#FF0000";
+			break;	
+		default:
+			break;
+		}
+		
+				
+		$(this).css("background-color", currentColor);		
+	
+	});
+}

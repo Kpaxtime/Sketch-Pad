@@ -27,12 +27,16 @@ li {
 		background-color: #FFFFFF;
 		overflow: hidden;
 		margin: 0 auto;
+		height: 1024px;
+		width: 1024px;
 }
 
 .data-block {
 		float: left;
 		background-color: black;
 		opacity: 1;
+		height: 32px;
+		width: 32px;
 }
 
 .red {
