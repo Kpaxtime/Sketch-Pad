@@ -38,9 +38,13 @@ $(document).ready(function () {
 		showGrid();
 	});
 
+	$("#clear").on('click', function() {
+		resetStyle();
+	});
+
 	$('#customize').on('click', function() {
 		setAttributes();
-	})
+	});
 });
 
 
@@ -198,8 +202,8 @@ function setAttributes() {
 	numBoxes = prompt("Enter the number of boxes per row");
 	inputColor = prompt("Enter the grid color");
 
-	setWidth = Math.floor(inputHeight/numBoxes);
-	setHeight = Math.floor(inputWidth/numBoxes);
+	setWidth = Math.floor(inputWidth/numBoxes);
+	setHeight = Math.floor(inputHeight/numBoxes);
 
 	$("#grid-holder").css({"width": (setWidth * numBoxes), "height": (setHeight * numBoxes)});
 
