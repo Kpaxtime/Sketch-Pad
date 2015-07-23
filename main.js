@@ -25,6 +25,11 @@ $(document).ready(function () {
 		trail();
 	});
 
+	$('#reverse-trail').on('click', function() {
+		reverseTrail();
+	});
+
+
 	$('#random-color').on('click', function() {
 		randomColor();
 	});
@@ -79,7 +84,7 @@ function runDefault() {
 
 function gradient() {
 		
-	resetStyle();
+	$('.data-block').off('mouseenter');
 
 	$('.data-block').on('mouseenter', function() {
 		var currentOpacity = $(this).css("opacity");
@@ -87,9 +92,9 @@ function gradient() {
 	});
 }
 
-function trail() {
+function reverseTrail() {
 
-	resetStyle();
+	$('.data-block').off('mouseenter');
 
 	$('.data-block').on('mouseenter', function() {
 		$(this).css("opacity", 0);
@@ -99,7 +104,7 @@ function trail() {
 
 function randomColor() {
 
-	resetStyle();
+	$('.data-block').off('mouseenter');
 
 	$('.data-block').on('mouseenter',function() {
 		
@@ -221,7 +226,7 @@ function addGrid() {
 
 function rainbow() {
 
-	resetStyle();
+	$('.data-block').off('mouseenter');
 
 	$('.data-block').on('mouseenter',function() {
 	switch(currentColor) {
@@ -254,4 +259,15 @@ function rainbow() {
 		$(this).css("background-color", currentColor);		
 	
 	});
+}
+
+function trail() {
+
+	$('.data-block').off('mouseenter');
+
+	$('.data-block').on('mouseenter', function() {
+		$(this).css("opacity", 1);
+		$(this).animate({opacity: 0}, "slow");
+	});
+
 }
