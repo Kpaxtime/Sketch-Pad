@@ -14,14 +14,23 @@
 			<p>In case of missized grids, press clear and/or reenter customize data</P>
 			<p>For a list of accepted color names, look <a href="http://www.w3schools.com/cssref/css_colornames.asp">here</a>.</p>
 			<ul>
-			<li><button type="button" id="gradient">Gradient</button></li>
-			<li><button type="button" id="trail">Trail</button></li>
-			<li><button type="button" id="reverse-trail">Reverse Trail</button></li>
-			<li><button type="button" id="random-color">Random Color</button></li>
-			<li><button type="button" id="rainbow">Rainbow</button></li>
+			
 			<li><button type="button" id="grid">Show Grid</button></li>
 			<li><button type="button" id="clear">Clear</button></li>
-			<li><button type="button" id="customize">Customize</button></li>
+			<li><button type="button" id="choose-color">Choose Color</button></li>
+			<li><button type="button" id="customize">Customize Grid</button></li>
+			<li>
+				<select>
+					<option id="base" value="base_selection" style="display:none">Select a Special Effect!</option>
+					<option id="gradient">Gradient</option>
+					<option id="trail">Trail</option>
+					<option id="reverse-trail">Reverse Trail</option>
+					<option id="random-color">Random Color</option>
+					<option id="rainbow">Rainbow</option>
+				</select>	
+			<li>	
+			</ul>
+
 		</div>	
 			<div id="grid-holder"></div>	
 		

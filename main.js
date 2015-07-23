@@ -3,7 +3,8 @@ var hasGrid = false;
 var setWidth = 32;
 var setHeight = 32;
 var inputColor = "black";
-var currentColor = "#820BBB";
+var rotateColor = "#820BBB";
+var currentColor = "black";
 var numBoxes;
 
 $(document).ready(function () {
@@ -14,7 +15,6 @@ $(document).ready(function () {
 	runDefault();
 	gradient();
 	
-
 	
 	$('#gradient').on('click', function () {
 		gradient();
@@ -47,13 +47,20 @@ $(document).ready(function () {
 		resetStyle();
 	});
 
+	$('#choose-color').on('click', function() {
+		chooseColor();
+	});
+
 	$('#customize').on('click', function() {
 		setAttributes();
 	});
 });
 
+function chooseColor() {
+	currentColor = prompt("Enter a color.");
+}
 
-function blockSetup() {
+/*function blockSetup() {
 $('#grid-holder').on('click', function() {
 	var size = 32;
 	if(size === 8) {
@@ -74,7 +81,7 @@ $('#grid-holder').on('click', function() {
 	}
 });
 }
-
+*/
 function runDefault() {
 	for(var i = 0; i <(32 * 32); i++) {
 		$('#grid-holder').append('<div class="data-block"></div>');
@@ -87,6 +94,7 @@ function gradient() {
 	$('.data-block').off('mouseenter');
 
 	$('.data-block').on('mouseenter', function() {
+		$(this).css("background-color", currentColor);
 		var currentOpacity = $(this).css("opacity");
 		$(this).css("opacity", currentOpacity - 0.30);
 	});
@@ -97,8 +105,9 @@ function reverseTrail() {
 	$('.data-block').off('mouseenter');
 
 	$('.data-block').on('mouseenter', function() {
+		$(this).css("background-color", currentColor);
 		$(this).css("opacity", 0);
-		$(this).animate({opacity: 1}, "slow");
+		$(this).animate({"opacity" : 1}, "slow");
 	});
 }
 
@@ -202,10 +211,10 @@ function resetStyle() {
 }
 
 function setAttributes() {
-	var inputHeight = prompt("Enter the height of the Sketch Pad (in pixels)");
-	var inputWidth = prompt("Enter the width of the Sketch Pad (in pixels)");
-	numBoxes = prompt("Enter the number of boxes per row");
-	inputColor = prompt("Enter the grid color");
+	var inputHeight = prompt("Enter the height of the Sketch Pad (in pixels).");
+	var inputWidth = prompt("Enter the width of the Sketch Pad (in pixels).");
+	numBoxes = prompt("Enter the number of boxes per row.");
+	inputColor = prompt("Enter the grid color.");
 
 	setWidth = Math.floor(inputWidth/numBoxes);
 	setHeight = Math.floor(inputHeight/numBoxes);
@@ -229,34 +238,34 @@ function rainbow() {
 	$('.data-block').off('mouseenter');
 
 	$('.data-block').on('mouseenter',function() {
-	switch(currentColor) {
+	switch(rotateColor) {
 		case "#FF0000":
-			currentColor = "#FF7519";
+			rotateColor = "#FF7519";
 			break;
 		case "#FF7519":
-			currentColor = 	"#FFFF00";
+			rotateColor = 	"#FFFF00";
 			break;
 		case "#FFFF00":
-			currentColor = "#66FF33";
+			rotateColor = "#66FF33";
 			break;
 		case "#66FF33":
-			currentColor = 	"#0000FF";
+			rotateColor = 	"#0000FF";
 			break;
 		case "#0000FF":
-			currentColor = "#2E0854";
+			rotateColor = "#2E0854";
 			break;
 		case "#2E0854":
-			currentColor = "#820BBB";
+			rotateColor = "#820BBB";
 			break;
 		case "#820BBB":
-			currentColor = "#FF0000";
+			rotateColor = "#FF0000";
 			break;	
 		default:
 			break;
 		}
 		
 				
-		$(this).css("background-color", currentColor);		
+		$(this).css("background-color", rotateColor);		
 	
 	});
 }
@@ -271,3 +280,4 @@ function trail() {
 	});
 
 }
+
