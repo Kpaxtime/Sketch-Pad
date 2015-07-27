@@ -4,7 +4,7 @@ var setWidth = 32;
 var setHeight = 32;
 var inputColor = "black";
 var rotateColor = "#820BBB";
-var currentColor = "black";
+var currentColor;
 var numBoxes;
 
 $(document).ready(function () {
@@ -15,7 +15,24 @@ $(document).ready(function () {
 	runDefault();
 	gradient();
 	
-	
+	$('select').change(function() {
+		if($(this).val() == 1) {
+			gradient();
+		}
+		else if($(this).val() == 2) {
+			trail();
+		}
+		else if($(this).val() == 3) {
+			reverseTrail();
+		}
+		else if($(this).val() == 4) {
+			randomColor();
+		}
+		else {
+			rainbow();
+		}
+	});
+
 	$('#gradient').on('click', function () {
 		gradient();
 	});
@@ -75,7 +92,6 @@ $('#grid-holder').on('click', function() {
 	else {
 		$('.data-block').addClass('.size64');
 	}
-
 	for(var i = 0; i < size; i++) {
 		$('#grid-holder').append('<div class="data-block"</div>');
 	}
@@ -128,14 +144,12 @@ function randomColor() {
 		gradient();
 	});
 }
-
 function clearGridTrail() {
 	$('button').on('click', function() {
 		resetStyle();
 		trail();
 	});
 }
-
 function clearGridRandom() {
 	$('button').on('click', function() {
 		$('#grid-holder').empty();
@@ -143,7 +157,6 @@ function clearGridRandom() {
 		randomColor();
 	});
 }		
-
  function rapidChange() {
 	$('button').on('click', function() {
 		while(true)	{
@@ -280,4 +293,3 @@ function trail() {
 	});
 
 }
-
