@@ -4,7 +4,7 @@ var setWidth = 32;
 var setHeight = 32;
 var inputColor = "black";
 var rotateColor = "#820BBB";
-var currentColor;
+var currentColor = "white";
 var numBoxes;
 
 $(document).ready(function () {
@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 });
 	runDefault();
-	gradient();
+	draw();
 	
 	$('select').change(function() {
 		if($(this).val() == 1) {
@@ -33,7 +33,7 @@ $(document).ready(function () {
 		}
 	});
 
-	$('#gradient').on('click', function () {
+	/*$('#gradient').on('click', function () {
 		gradient();
 	});
 	
@@ -53,8 +53,11 @@ $(document).ready(function () {
 
 	  $('#rainbow').on('click', function() {
 		rainbow();
-	});
+	}); */
 	
+	$('#draw').on('click', function() {
+		draw();
+	});
 
 	$('#grid').on('click', function() {
 		showGrid();
@@ -75,6 +78,7 @@ $(document).ready(function () {
 
 function chooseColor() {
 	currentColor = prompt("Enter a color.");
+	drawColor = currentColor;
 }
 
 /*function blockSetup() {
@@ -110,7 +114,11 @@ function gradient() {
 	$('.data-block').off('mouseenter');
 
 	$('.data-block').on('mouseenter', function() {
-		$(this).css("background-color", currentColor);
+		
+		if(currentColor !== "white") {
+			$(this).css("background-color", currentColor);
+		}
+
 		var currentOpacity = $(this).css("opacity");
 		$(this).css("opacity", currentOpacity - 0.30);
 	});
@@ -232,6 +240,10 @@ function setAttributes() {
 	setWidth = Math.floor(inputWidth/numBoxes);
 	setHeight = Math.floor(inputHeight/numBoxes);
 
+	if($('#grid').text() == "Hide Grid") {
+		showGrid();
+	}
+
 	$("#grid-holder").css({"width": (setWidth * numBoxes), "height": (setHeight * numBoxes)});
 
 	addGrid();
@@ -292,4 +304,11 @@ function trail() {
 		$(this).animate({opacity: 0}, "slow");
 	});
 
+}
+
+function draw() {
+	$('.data-block').on('mouseenter', function() {
+		$(this).css("background-color", currentColor);
+	});
+	
 }
