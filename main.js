@@ -8,52 +8,11 @@ var currentColor = "white";
 var numBoxes;
 
 $(document).ready(function () {
-	$('p').on('click', function() {
-	$(this).addClass('newtext');
-
-});
+	
 	runDefault();
 	draw();
+	dropDownMenu();
 	
-	$('select').change(function() {
-		if($(this).val() == 1) {
-			gradient();
-		}
-		else if($(this).val() == 2) {
-			trail();
-		}
-		else if($(this).val() == 3) {
-			reverseTrail();
-		}
-		else if($(this).val() == 4) {
-			randomColor();
-		}
-		else {
-			rainbow();
-		}
-	});
-
-	/*$('#gradient').on('click', function () {
-		gradient();
-	});
-	
-
-	$('#trail').on('click', function() {
-		trail();
-	});
-
-	$('#reverse-trail').on('click', function() {
-		reverseTrail();
-	});
-
-
-	$('#random-color').on('click', function() {
-		randomColor();
-	});
-
-	  $('#rainbow').on('click', function() {
-		rainbow();
-	}); */
 	
 	$('#draw').on('click', function() {
 		draw();
@@ -81,27 +40,6 @@ function chooseColor() {
 	drawColor = currentColor;
 }
 
-/*function blockSetup() {
-$('#grid-holder').on('click', function() {
-	var size = 32;
-	if(size === 8) {
-		$('.data-block').addClass('.size8');
-	}
-	else if(size === 16) {
-		$('.data-block').addClass('.size16');
-	}
-	else if(size === 32) {
-		$('.data-block').addClass('.size32');
-	}
-	else {
-		$('.data-block').addClass('.size64');
-	}
-	for(var i = 0; i < size; i++) {
-		$('#grid-holder').append('<div class="data-block"</div>');
-	}
-});
-}
-*/
 function runDefault() {
 	for(var i = 0; i <(32 * 32); i++) {
 		$('#grid-holder').append('<div class="data-block"></div>');
@@ -115,10 +53,6 @@ function gradient() {
 
 	$('.data-block').on('mouseenter', function() {
 		
-		if(currentColor !== "white") {
-			$(this).css("background-color", currentColor);
-		}
-
 		var currentOpacity = $(this).css("opacity");
 		$(this).css("opacity", currentOpacity - 0.30);
 	});
@@ -129,7 +63,7 @@ function reverseTrail() {
 	$('.data-block').off('mouseenter');
 
 	$('.data-block').on('mouseenter', function() {
-		$(this).css("background-color", currentColor);
+		
 		$(this).css("opacity", 0);
 		$(this).animate({"opacity" : 1}, "slow");
 	});
@@ -145,35 +79,6 @@ function randomColor() {
 	});
 }
 
-/* function clearGridGradient() {
-	$('button').on('click', function() {
-		$('#grid-holder').empty();
-		initialize();
-		gradient();
-	});
-}
-function clearGridTrail() {
-	$('button').on('click', function() {
-		resetStyle();
-		trail();
-	});
-}
-function clearGridRandom() {
-	$('button').on('click', function() {
-		$('#grid-holder').empty();
-		initialize();
-		randomColor();
-	});
-}		
- function rapidChange() {
-	$('button').on('click', function() {
-		while(true)	{
-			$('.data-block').animate({background-color : randomChange() }, "slow");
-		}
-	});
-}
-*/
-
 function randomChange() {
 		var maxNum = 16777215;
 
@@ -186,12 +91,7 @@ function randomChange() {
 		newColor = "#" + newColor;
 		return newColor;
 }
-/* function clearRandomChange() {
-		$('#grid-holder').empty();
-		initialize();
-		rapidChange();
-}
-*/
+
 function showGrid() {
 	if($('#grid').text() == "Show Grid") {
 		$('.data-block').addClass('show-grid');
@@ -216,19 +116,12 @@ function keepGrid() {
 	}
 }
 
-/* function gridText() {
-	 if($('#grid').innerHTML == "Show Grid") {
-	 	$('#grid').innerHTML("Hide Grid"); 
-	 }
-	 else {
-	 	$('#grid').innerHTML("Show Grid");
-	 }
-}
-*/
 function resetStyle() {
 	$('#grid-holder').empty();
 		addGrid();
 		keepGrid();
+		draw();
+		menuTitle();
 }
 
 function setAttributes() {
@@ -247,8 +140,8 @@ function setAttributes() {
 	$("#grid-holder").css({"width": (setWidth * numBoxes), "height": (setHeight * numBoxes)});
 
 	addGrid();
-
-	
+	draw();
+	menuTitle();
 }	
 
 function addGrid() {
@@ -268,13 +161,13 @@ function rainbow() {
 			rotateColor = "#FF7519";
 			break;
 		case "#FF7519":
-			rotateColor = 	"#FFFF00";
+			rotateColor = "#FFFF00";
 			break;
 		case "#FFFF00":
 			rotateColor = "#66FF33";
 			break;
 		case "#66FF33":
-			rotateColor = 	"#0000FF";
+			rotateColor = "#0000FF";
 			break;
 		case "#0000FF":
 			rotateColor = "#2E0854";
@@ -311,4 +204,29 @@ function draw() {
 		$(this).css("background-color", currentColor);
 	});
 	
+}
+
+function dropDownMenu() {
+	$('select').change(function() {
+		if($(this).val() == 1) {
+			gradient();
+		}
+		else if($(this).val() == 2) {
+			trail();
+		}
+		else if($(this).val() == 3) {
+			reverseTrail();
+		}
+		else if($(this).val() == 4) {
+			randomColor();
+		}
+		else {
+			rainbow();
+		}
+	});
+}
+
+function menuTitle() {
+	var chosenOption = document.getElementById("#base2");
+	chosenOption.selected = "selected";
 }

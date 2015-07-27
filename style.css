@@ -39,36 +39,8 @@ li {
 		width: 32px;
 }
 
-.red {
-    color: red;
-}
-
 #base {
 	display: none;
-}
-
-.size8 {
-		width: 128px;
-		height: 128px;
-}
-
-.size16 {
-		width: 64px;
-		height: 64px;
-}
-
-.size32 {
-		width: 32px;
-		height: 32px;
-}
-
-.size64 {
-		width: 16px;
-		height: 16px;
-}
-
-.newtext {
-	color: red;
 }
 
 .show-grid {
